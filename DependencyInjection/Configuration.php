@@ -13,10 +13,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $tree = new TreeBuilder();
-        $tree->root('intaro_postgres_search')
-            ->end();
+        $tree = new TreeBuilder('intaro_postgres_search');
 
-        return $tree;
+        // Keep compatibility with symfony/config < 4.2
+        if (!method_exists($tree, 'getRootNode')) {
+            return $tree->root('jms_translation')->end();
+        } else {
+            return $tree->getRootNode()->end();
+        }
     }
 }
