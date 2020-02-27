@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
 
         // Keep compatibility with symfony/config < 4.2
         if (!method_exists($tree, 'getRootNode')) {
-            return $tree->root('jms_translation')->end();
+            return $tree->root('intaro_postgres_search')->end();
         } else {
             return $tree->getRootNode()->end();
         }
